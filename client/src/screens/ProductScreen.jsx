@@ -76,6 +76,11 @@ const ProductScreen = ({ match, history }) => {
                                             <Col>
                                                 <Form.Control
                                                     as="select"
+                                                    style={{
+                                                        padding: '0.75rem 0',
+                                                        textAlign: 'center',
+                                                        textAlignLast: 'center',
+                                                    }}
                                                     value={qty}
                                                     onChange={(e) => setQty(e.target.value)}
                                                 >
