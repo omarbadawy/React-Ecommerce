@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
 const userSchema = new mongoose.Schema(
     {
@@ -19,10 +20,7 @@ const userSchema = new mongoose.Schema(
         password: {
             type: String,
             required: true,
-            minlength: [
-                8,
-                'Password must have more or equal than 8 characters!',
-            ],
+            minlength: [8, 'Password must have more or equal than 8 characters!'],
         },
         isAdmin: {
             type: Boolean,
@@ -34,6 +32,10 @@ const userSchema = new mongoose.Schema(
         timestamps: true,
     }
 )
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password)
+}
 
 const User = mongoose.model('User', userSchema)
 
